@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Build your English vocabulary one word at a time with Word Hunt.">
+  <title>WORD HUNT — Learn English by playing</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Word Hunt home"><span class="brand-mark">W</span><span>WORD HUNT<span class="brand-period">.</span></span></a>
+      <div class="header-note"><span class="status-dot"></span> A little English, every day</div>
+    </header>
+
+    <main>
+      <section class="screen home-screen" id="home-screen" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> YOUR DAILY WORD ADVENTURE</p>
+          <h1 id="hero-title">Find the word.<br><span>Keep it forever.</span></h1>
+          <p class="hero-description">A quick, playful way to grow your English vocabulary. Pick a level, choose a game, and let curiosity lead.</p>
+          <div class="hero-meta"><span>✦</span> 2 ways to play <span class="meta-divider">·</span> 5 levels to explore</div>
+        </div>
+        <div class="setup-card">
+          <div class="card-heading"><div><p class="eyebrow">LET’S GET STARTED</p><h2>Set up your game</h2></div><span class="step-badge">01 <span>/ 01</span></span></div>
+          <fieldset class="level-field"><legend>Choose your level</legend><div class="level-grid" id="level-grid" role="group" aria-label="English level"></div></fieldset>
+          <fieldset class="mode-field"><legend>Choose your game</legend><div class="mode-options">
+            <label class="mode-option"><input type="radio" name="mode" value="hangman" checked><span class="mode-icon">⌁</span><span class="mode-copy"><strong>Hangman</strong><small>Guess it letter by letter</small></span><span class="radio-mark"></span></label>
+            <label class="mode-option"><input type="radio" name="mode" value="wordle"><span class="mode-icon wordle-icon">▦</span><span class="mode-copy"><strong>Wordle</strong><small>Guess words of any length</small></span><span class="radio-mark"></span></label>
+          </div></fieldset>
+          <button class="button button-primary play-button" id="play-button" type="button">Play <span aria-hidden="true">→</span></button>
+          <p class="privacy-note">No sign-up. Just you and a new word.</p>
+        </div>
+        <div class="hero-doodle doodle-one" aria-hidden="true">a</div><div class="hero-doodle doodle-two" aria-hidden="true">?</div>
+      </section>
+
+      <section class="screen game-screen hidden" id="game-screen" aria-labelledby="game-title">
+        <div class="game-topline"><button class="text-button" id="back-button" type="button">← <span>Back to setup</span></button><div class="game-tags"><span class="tag" id="game-level-tag">A1</span><span class="tag tag-soft" id="game-mode-tag">HANGMAN</span></div></div>
+        <div class="game-heading"><p class="eyebrow">TAKE A GUESS</p><h2 id="game-title">Hangman</h2><p id="game-instruction">Choose a letter to reveal the word.</p></div>
+        <div class="game-layout">
+          <div class="play-panel">
+            <div class="hangman-illustration" id="hangman-illustration" aria-label="Hangman drawing">
+              <svg viewBox="0 0 260 230" role="img" aria-labelledby="gallows-title"><title id="gallows-title">Hangman drawing, parts appear after wrong guesses</title>
+                <path class="gallows" d="M35 205h190M75 205V28h110v25" />
+                <circle class="hang-part" data-part="1" cx="185" cy="72" r="18" />
+                <path class="hang-part" data-part="2" d="M185 90v48" />
+                <path class="hang-part" data-part="3" d="m185 104-27 22" />
+                <path class="hang-part" data-part="4" d="m185 104 27 22" />
+                <path class="hang-part" data-part="5" d="m185 138-23 32" />
+                <path class="hang-part" data-part="6" d="m185 138 23 32" />
+              </svg>
+              <p class="mistakes-label">MISTAKES <strong id="mistakes-count">0 / 6</strong></p>
+            </div>
+            <div class="word-area"><div class="word-slots" id="word-slots" aria-label="Hidden word"></div><p class="word-hint" id="word-hint">Your word is waiting...</p></div>
+            <div class="keyboard" id="keyboard" aria-label="Letter keyboard"></div>
+            <div class="wordle-board hidden" id="wordle-board" aria-label="Wordle guesses"></div>
+            <form class="wordle-entry hidden" id="wordle-entry"><label class="visually-hidden" for="wordle-input">Enter your word</label><input id="wordle-input" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="TYPE YOUR GUESS"><button class="button button-primary" type="submit">Guess <span>→</span></button></form>
+            <div class="wordle-keyboard hidden" id="wordle-keyboard" aria-label="Wordle keyboard"></div>
+            <p class="input-message" id="input-message" aria-live="polite"></p>
+          </div>
+          <aside class="round-info"><div class="round-status"><span class="status-icon">✦</span><div><p class="eyebrow">ROUND STATUS</p><strong id="round-status-text">Ready when you are</strong></div></div><div class="round-rule"></div><div class="round-stats"><div><span id="round-progress">01</span><small>ROUND</small></div><div><span id="round-score">0</span><small>WORDS FOUND</small></div></div><div class="round-tip"><span>💡</span><div class="round-tip-copy"><p id="round-tip-text">Start with a vowel — it’s a good place to begin.</p><p id="round-tip-extra" class="round-tip-extra hidden"></p></div></div><button class="hint-button" id="hint-button" type="button"><span aria-hidden="true">✦</span><span class="hint-button-copy"><strong>Reveal one letter</strong><small id="hint-button-text">Available once per round.</small></span></button></aside>
+        </div>
+        <section class="result-card hidden" id="result-card" aria-live="polite"><div class="result-icon" id="result-icon">✦</div><div class="result-content"><p class="eyebrow" id="result-eyebrow">NICE WORK</p><h3 id="result-title">You found it!</h3><div class="study-word"><div><strong id="result-word">word</strong><span id="result-ipa">/wɜːd/</span></div><span class="translation" id="result-translation">перевод</span></div><p class="definition" id="result-meaning"></p><p class="example" id="result-example"></p></div><button class="button button-primary next-button" id="next-button" type="button">Next word <span>→</span></button></section>
+      </section>
+    </main>
+    <footer class="footer"><span>© WORD HUNT</span><span>Little words. Big progress.</span><span>HELLO FROM ULYYASS <span class="footer-star">✳</span></span></footer>
+  </div>
+</body>
+</html>
+
