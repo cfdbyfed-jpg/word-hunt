@@ -1,5 +1,6 @@
 # WORD HUNT
 
+▶ Play WORD HUNT — Learn English vocabulary through Hangman and Wordle.
 WORD HUNT is a small browser game for learning English vocabulary through two word-guessing games. Choose a CEFR level, play a round, and learn the word with its Russian translation, IPA pronunciation, definition, and example sentence.
 
 ## Features
